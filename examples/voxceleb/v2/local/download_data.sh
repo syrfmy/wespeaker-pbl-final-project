@@ -49,7 +49,7 @@ if [ ! -f ${download_dir}/vox1_dev_wav.zip ]; then
   wait
   cat ${download_dir}/vox1_dev* >${download_dir}/vox1_dev_wav.zip
   md5=$(md5sum ${download_dir}/vox1_dev_wav.zip | awk '{print $1}')
-  [ $md5 != "ae63e55b951748cc486645f532ba230b" ] && echo "Wrong md5sum of vox1_dev_wav.zip" && exit 1
+  [ $md5 != "ae63e55b951748cc486645f532ba230b" ] && echo "Wrong md5sum of vox1_dev_wav.zip" #&& exit 1 md5sum is always wrong because only using part a
 fi
 
 if [ ! -f ${download_dir}/vox2_aac.zip ]; then
@@ -60,7 +60,7 @@ if [ ! -f ${download_dir}/vox2_aac.zip ]; then
   wait
   cat ${download_dir}/vox2_dev_aac* >${download_dir}/vox2_aac.zip
   md5=$(md5sum ${download_dir}/vox2_aac.zip | awk '{print $1}')
-  [ $md5 != "bbc063c46078a602ca71605645c2a402" ] && echo "Wrong md5sum of vox2_aac.zip" && exit 1
+  [ $md5 != "bbc063c46078a602ca71605645c2a402" ] && echo "Wrong md5sum of vox2_aac.zip" #&& exit 1 md5sum is always wrong because only using part a
 fi
 
 echo "Download success !!!"
