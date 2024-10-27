@@ -43,24 +43,30 @@ fi
 
 if [ ! -f ${download_dir}/vox1_dev_wav.zip ]; then
   echo "Downloading vox1_dev_wav.zip ..."
-  for part in a ; do # only use part a for small download original is a b c d 
+  for part in a d ; do # only use part a for small download original is a b c d 
     wget --no-check-certificate https://huggingface.co/datasets/ProgramComputer/voxceleb/resolve/main/vox1/vox1_dev_wav_parta${part} -P ${download_dir} &
   done
   wait
   cat ${download_dir}/vox1_dev* >${download_dir}/vox1_dev_wav.zip
   md5=$(md5sum ${download_dir}/vox1_dev_wav.zip | awk '{print $1}')
   [ $md5 != "ae63e55b951748cc486645f532ba230b" ] && echo "Wrong md5sum of vox1_dev_wav.zip" #&& exit 1 md5sum is always wrong because only using part a
+  for part in a d; do # delete the part files
+    rm ${download_dir}/vox1_dev_wav_parta${part} &
+  done
 fi
 
 if [ ! -f ${download_dir}/vox2_aac.zip ]; then
   echo "Downloading vox2_aac.zip ..."
-  for part in a ; do # only use part a for small download original is a b c d e f g h
+  for part in a h; do # only use part a for small download original is a b c d e f g h
     wget --no-check-certificate https://huggingface.co/datasets/ProgramComputer/voxceleb/resolve/main/vox2/vox2_dev_aac_parta${part} -P ${download_dir} &
   done
   wait
   cat ${download_dir}/vox2_dev_aac* >${download_dir}/vox2_aac.zip
   md5=$(md5sum ${download_dir}/vox2_aac.zip | awk '{print $1}')
   [ $md5 != "bbc063c46078a602ca71605645c2a402" ] && echo "Wrong md5sum of vox2_aac.zip" #&& exit 1 md5sum is always wrong because only using part a
+  for part in a h; do # delete the part files
+    rm ${download_dir}/vox2_dev_aac_parta${part} &
+  done
 fi
 
 echo "Download success !!!"

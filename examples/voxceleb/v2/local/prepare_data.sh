@@ -42,21 +42,31 @@ if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
 
   if [ ! -d ${rawdata_dir}/musan ]; then
     tar -xzvf ${download_dir}/musan.tar.gz -C ${rawdata_dir}
+    # delete the original archive
+    rm ${download_dir}/musan.tar.gz
   fi
 
   if [ ! -d ${rawdata_dir}/RIRS_NOISES ]; then
     unzip ${download_dir}/rirs_noises.zip -d ${rawdata_dir}
+    # delete the original archive
+    rm ${download_dir}/rirs_noises.zip
   fi
 
   if [ ! -d ${rawdata_dir}/voxceleb1 ]; then
     mkdir -p ${rawdata_dir}/voxceleb1/test ${rawdata_dir}/voxceleb1/dev
     unzip ${download_dir}/vox1_test_wav.zip -d ${rawdata_dir}/voxceleb1/test
     unzip ${download_dir}/vox1_dev_wav.zip -d ${rawdata_dir}/voxceleb1/dev
+
+    # delete the original archive
+    rm ${download_dir}/vox1_test_wav.zip
+    rm ${download_dir}/vox1_dev_wav.zip
   fi
 
   if [ ! -d ${rawdata_dir}/voxceleb2_m4a ]; then
     mkdir -p ${rawdata_dir}/voxceleb2_m4a
     unzip ${download_dir}/vox2_aac.zip -d ${rawdata_dir}/voxceleb2_m4a
+    # delete the original archive
+    rm ${download_dir}/vox2_aac.zip
   fi
 
   echo "Decompress success !!!"
@@ -71,6 +81,8 @@ if [ ${stage} -le 3 ] && [ ${stop_stage} -ge 3 ]; then
     # Here we use 8 parallel jobs
     cat ${rawdata_dir}/voxceleb2_wav/dev/m4a2wav_dev.sh | xargs -P 8 -i sh -c "{}"
   fi
+
+  # delete the original m4a files
 
   echo "Convert m4a2wav success !!!"
 fi
