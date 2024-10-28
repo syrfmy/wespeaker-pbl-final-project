@@ -9,7 +9,7 @@ stage=-1
 stop_stage=-1
 
 data=data
-data_type="raw"  # shard/raw
+data_type="shard"  # shard/raw
 model=whisper_PMFA_large_v2
 
 exp_dir=exp/Whisper_PMFA_large_v2_voxceleb1_mel_5s
